@@ -33,7 +33,6 @@ print(check(df))
 
 
 #DEFINE VARIABLE
-
 state_list = df.state.unique().tolist()
 n = np.array(df.state.nunique())
 r = np.arange(n)
@@ -99,7 +98,6 @@ date_7_days_ago = datetime.datetime.today() - datetime.timedelta(days=10)
 df_last_7_days = df[df['date'] >= date_7_days_ago]
 # Group the data by date and calculate the sum of new cases for each day
 df_new_cases_last_7_days = df_last_7_days.groupby(["state"]).agg({'cases_new': 'sum'}).reset_index()
-
 # Print the resulting dataframe
 print(df_new_cases_last_7_days)
 
