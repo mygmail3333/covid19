@@ -35,17 +35,7 @@ def check(df):
 print(check(df))
 
 
-#FILTER STATEMENT WITH VARIEBLE
-#dataz = data.loc[((data.YEAR >= yearstart) & (data.YEAR <= yearend)) & ((data.COUNTTYPE == fine) | (data.COUNTTYPE == medium) | (data.COUNTTYPE == coarse))]
-#datax = dataz.loc[(data.COUNTRY == country.upper())]
-#df['date'] = pd.to_datetime(df['order_date'])
-# convert the 'date' column to a datetime object
-
-#print(df['date'].dt.year)
-#print(df.dtypes)
-# group the DataFrame by year and sum the 'value' column
-#result = df.groupby(df['date'].dt.year)['value'].sum()
-#print(result)
+#DEFINE VARIABLE
 
 state_list = df.state.unique().tolist()
 n = np.array(df.state.nunique())
