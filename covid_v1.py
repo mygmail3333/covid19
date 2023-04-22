@@ -15,9 +15,6 @@ df= pd.read_csv(state)
 
 #pd.options.display.max_columns = None
 df['date'] = pd.to_datetime(df['date'])
-#df['date'] = df['date'].dt.date
-print(df.date)
-#df.groupby(["state", "cases_new"])
 
 
 #df.info()
