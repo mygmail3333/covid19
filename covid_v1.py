@@ -40,6 +40,8 @@ r = np.arange(n)
 
 data = df.groupby(["state",(df['date'].dt.year)])["cases_new"].sum().unstack()
 print(data)
+
+#PLOT LINE CHART
 data.plot(figsize=(14,7), marker="o")
 plt.ticklabel_format(style="plain", axis='y')
 plt.xticks(r,state_list)
@@ -52,6 +54,7 @@ plt.legend(title ="YEARS:")
 plt.grid()
 plt.show()
 
+#PLOT BAR CHART
 data.plot(kind ="bar",figsize=(14,7),stacked=False)
 plt.title("TOTAL NEW COVID-19 CASES BY STATE FROM YEAR 2020 - 2023 ", fontsize=15)
 plt.ylabel("Number of Cases", fontsize=15)
@@ -63,18 +66,14 @@ plt.grid()
 plt.show()
 
 
-
-
+#DEFINE VARIABLE
 df1 = df.copy()
 df1 =df1.sort_values(by=["state","date"],ascending=True)
-#df1.set_index('date', inplace=True)
-#df2 =df1.loc[:,["date", "state","cases_new","cases_recovered","cases_active"]]
-
 y1 =df1.cases_new
 y2 =df1.cases_recovered * -1
 x = df1.date
 
-# plot line chart
+#PLOT LINE CHART FOR DUAL DATA
 plt.figure(figsize=(13,7))
 plt.title("OVERVIEW COVID-19 NEW CASES VS RECOVERY CASES",fontsize=15)
 plt.plot(x,y1, color='red', linewidth = 2,  label = 'NEW_CASES')
@@ -90,17 +89,14 @@ plt.show()
 
 
 # DISPLAY LATEST RESULT
-# DISPLAY LAST DAY RESULT
 print(df.loc[:,["date","state", "cases_new"]].tail(16))
 #print(df.groupby(["state",(df['date'].dt.year),(df['date'].dt.month),(df['date'].dt.day)])["cases_new"].sum().unstack())
 
 
 # DISPLAY LAST 7 DAY TOTAL RESULT
 date_7_days_ago = datetime.datetime.today() - datetime.timedelta(days=10)
-
 # Filter the dataframe to only include rows for the last 7 days
 df_last_7_days = df[df['date'] >= date_7_days_ago]
-
 # Group the data by date and calculate the sum of new cases for each day
 df_new_cases_last_7_days = df_last_7_days.groupby(["state"]).agg({'cases_new': 'sum'}).reset_index()
 
@@ -108,8 +104,7 @@ df_new_cases_last_7_days = df_last_7_days.groupby(["state"]).agg({'cases_new': '
 print(df_new_cases_last_7_days)
 
 
-# DISPLAY LAST 7 DAY TOTAL RESULT
-# Print the resulting dataframe
+# DISPLAY LAST 7 DAY RESULT
 pd.options.display.max_columns = None
 print(df_last_7_days.groupby(['state',df['date'].dt.date])["cases_new"].sum().unstack())
 df2 = df_last_7_days.groupby(['state',df['date'].dt.date])["cases_new"].sum().unstack()
