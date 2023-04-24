@@ -3,21 +3,17 @@ import matplotlib.pyplot as plt
 import numpy as np
 import datetime
 
-#data = "https://github.com/MoH-Malaysia/covid19-public/blob/main/epidemic/cases_malaysia.csv"
+#READ DATE FROM WEB
 my = "https://raw.githubusercontent.com/MoH-Malaysia/covid19-public/main/epidemic/cases_malaysia.csv"
 state = "https://raw.githubusercontent.com/MoH-Malaysia/covid19-public/main/epidemic/cases_state.csv"
-
-
 df_my = pd.read_csv(my)
 df= pd.read_csv(state)
-#df.to_csv("c:\\users\\DT\\DROPBOX\\WFH\\python\\covid_state.csv", index=False)# source file created
 
 
-#pd.options.display.max_columns = None
+#CHANGE TYPE TO DATETIME64
 df['date'] = pd.to_datetime(df['date'])
 
-
-#df.info()
+#CHECK DATA
 def check(df):
     l=[]
     columns=df.columns
@@ -37,6 +33,7 @@ state_list = df.state.unique().tolist()
 n = np.array(df.state.nunique())
 r = np.arange(n)
 
+#GROUP DATA
 data = df.groupby(["state",(df['date'].dt.year)])["cases_new"].sum().unstack()
 print(data)
 
@@ -89,7 +86,6 @@ plt.show()
 
 # DISPLAY LATEST RESULT
 print(df.loc[:,["date","state", "cases_new"]].tail(16))
-#print(df.groupby(["state",(df['date'].dt.year),(df['date'].dt.month),(df['date'].dt.day)])["cases_new"].sum().unstack())
 
 
 # DISPLAY LAST 7 DAY TOTAL RESULT
